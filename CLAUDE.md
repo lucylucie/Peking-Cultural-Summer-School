@@ -90,10 +90,12 @@ borderRadius: {
 ```
 
 **Discipline rules:**
-- Never introduce a color outside this palette. If you need a muted variant, use Tailwind opacity utilities on an existing token.
+- Never introduce a color outside this palette. If you need a muted variant, use opacity/rgba mixes of an existing token, not a new hex value.
 - No gradients. No drop shadows heavier than `shadow-sm`.
 - No icon libraries unless explicitly required (avoid decorative Feather/Lucide icons scattered through the UI). If icons are needed for navigation only, use a minimal single-weight set.
 - No stock cultural motifs: no red-and-gold combos, no lantern/pagoda/dragon iconography, no "Asian-inspired" border patterns.
+
+**Illustration style (revised — see Progress log):** The project moved away from thin abstract line-art placeholders. Every dish, every named person, and every "empty" visual slot should carry a real, detailed illustration — full color fills, texture, garnish/context detail for dishes; actual hairstyles and facial features for people — evoking real cuisine, culture, and tourism rather than reading as a wireframe. This is still hand-drawn vector art (SVG), not photography or AI-generated raster images — no image-generation or external-image-fetching tool is available in this environment, and real photos were never sourced or downloaded (do not assume any exist in `public/`). If real photography becomes available later (user-supplied files, or a session with working image tooling), it should replace the illustrations rather than run alongside them. Keep the anti-cliché and palette-discipline rules above in force regardless of illustration density — richer detail is not license for red-and-gold palettes, lantern/dragon motifs, or colors outside the 5 tokens.
 
 ---
 
@@ -139,7 +141,7 @@ These are stated in the brief but restated here because they must survive every 
 
 4. **Duong Lam only.** No multi-village browsing. No village switcher. No "explore other villages" affordance. The archive is scoped to one village.
 
-5. **Attribution over decoration.** When in doubt about whether to add visual polish (illustrations, patterns, illustrated empty states), don't. The proposal's stated design principle is restraint.
+5. **Attribution over decoration, but illustration is not decoration here.** Attribution must never be sacrificed for visual polish — it stays visible regardless of how illustrated a screen is. That said, per the revised illustration style above, dish and person illustrations are expected on every screen that references them; "restraint" now means staying within the palette and avoiding stock cultural clichés, not avoiding imagery altogether.
 
 ---
 
@@ -194,3 +196,11 @@ If session context is filling up:
 3. Commit and stop — do not start a new screen
 
 Better to leave a clean handoff than to build half a screen.
+
+---
+
+## Progress
+
+All 24 screens built (Phases 1–4 complete), full Village Author / Contributor / Visitor loops verified end-to-end, PR #1 open against `main`.
+
+**Design pivot (post-launch):** the original restraint-first illustration approach (thin abstract line-art) was explicitly reversed by the project owner — see the "Illustration style" note under Design tokens above. Every dish and named person now gets a detailed, full-color hand-drawn illustration via `DishIllustration` and `PersonAvatar` (`src/components/shared/`). No real photography is in the project; none was sourced (network/image-gen tooling unavailable in-session). If a future session gains that capability and the user wants to swap in real photos, replace these components' internals rather than layering photos on top of them.
