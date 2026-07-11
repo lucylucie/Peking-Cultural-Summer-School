@@ -19,6 +19,7 @@ export const contributionTypeLabels = {
   translation: 'Translation',
   illustration: 'Illustration',
   context: 'Context',
+  visit: 'Visit contribution',
 }
 
 export const scaffoldCommentTypeLabels = {
@@ -26,4 +27,10 @@ export const scaffoldCommentTypeLabels = {
   'family-memory': 'Family memory',
   'dialectal-term': 'Dialectal term',
   correction: 'Correction / extension',
+}
+
+export const scaffoldTagLabels = {
+  'needs-translation': 'Needs translation',
+  'needs-illustration': 'Needs illustration',
+  'needs-context': 'Needs context',
 }

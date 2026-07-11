@@ -25,7 +25,7 @@ const NAV_ITEMS = {
   ],
 }
 
-function NavItems({ role }) {
+function NavItems({ role, layout }) {
   return NAV_ITEMS[role].map(({ to, label, icon: Icon, end }) => (
     <NavLink
       key={label}
@@ -33,7 +33,10 @@ function NavItems({ role }) {
       end={end}
       className={({ isActive }) =>
         clsx(
-          'flex flex-1 flex-col items-center gap-1 py-2 text-xs md:flex-row md:gap-1.5 md:px-3',
+          'flex items-center whitespace-nowrap text-xs',
+          layout === 'row'
+            ? 'flex-shrink-0 gap-1.5 px-2 py-1.5'
+            : 'flex-1 flex-col gap-1 py-2',
           isActive ? 'text-terracotta' : 'text-ink/60'
         )
       }
@@ -53,10 +56,13 @@ export default function NavShell({ children }) {
       <RoleSwitcher />
 
       {isTopNav && (
-        <header className="flex items-center justify-between border-b border-ink/10 bg-white px-4 py-3">
-          <span className="font-serif text-lg">LA — Làng Archives</span>
-          <nav className="flex items-center gap-1">
-            <NavItems role={role} />
+        <header className="flex items-center gap-3 border-b border-ink/10 bg-white px-3 py-2 sm:px-4 sm:py-3">
+          <span className="shrink-0 font-serif text-base sm:text-lg">
+            <span className="sm:hidden">LA</span>
+            <span className="hidden sm:inline">LA — Làng Archives</span>
+          </span>
+          <nav className="flex flex-1 items-center gap-1 overflow-x-auto">
+            <NavItems role={role} layout="row" />
           </nav>
         </header>
       )}
@@ -65,7 +71,7 @@ export default function NavShell({ children }) {
 
       {!isTopNav && (
         <nav className="fixed inset-x-0 bottom-0 flex border-t border-ink/10 bg-white">
-          <NavItems role={role} />
+          <NavItems role={role} layout="column" />
         </nav>
       )}
     </div>
