@@ -42,7 +42,7 @@ function NavItems({ role, layout }) {
       }
     >
       <Icon size={18} strokeWidth={1.5} />
-      <span>{label}</span>
+      <span className={layout === 'row' ? 'hidden sm:inline' : undefined}>{label}</span>
     </NavLink>
   ))
 }
