@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { RoleProvider } from './lib/RoleContext'
+import { EntriesProvider } from './lib/EntriesContext'
 import NavShell from './components/shared/NavShell'
 
 import Splash from './screens/shared/Splash'
@@ -38,43 +39,45 @@ function ShellLayout({ children }) {
 function App() {
   return (
     <RoleProvider>
-      <Routes>
-        {/* Pre-role-selection entry flow — no nav shell */}
-        <Route path="/" element={<Splash />} />
-        <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/role-selection" element={<RoleSelection />} />
+      <EntriesProvider>
+        <Routes>
+          {/* Pre-role-selection entry flow — no nav shell */}
+          <Route path="/" element={<Splash />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/role-selection" element={<RoleSelection />} />
 
-        {/* Shared, role-agnostic archive screens */}
-        <Route path="/archive" element={<ShellLayout><ArchiveExplorer /></ShellLayout>} />
-        <Route path="/archive/:entryId" element={<ShellLayout><ArchiveEntryDetail /></ShellLayout>} />
+          {/* Shared, role-agnostic archive screens */}
+          <Route path="/archive" element={<ShellLayout><ArchiveExplorer /></ShellLayout>} />
+          <Route path="/archive/:entryId" element={<ShellLayout><ArchiveEntryDetail /></ShellLayout>} />
 
-        {/* Village Author track */}
-        <Route path="/village" element={<ShellLayout><VillageDashboard /></ShellLayout>} />
-        <Route path="/village/record" element={<ShellLayout><VoiceContribution /></ShellLayout>} />
-        <Route path="/village/draft/:entryId" element={<ShellLayout><DraftReview /></ShellLayout>} />
-        <Route path="/village/invite/:entryId" element={<ShellLayout><CoAuthorInvitation /></ShellLayout>} />
-        <Route path="/village/publish/:entryId" element={<ShellLayout><PublishApproval /></ShellLayout>} />
+          {/* Village Author track */}
+          <Route path="/village" element={<ShellLayout><VillageDashboard /></ShellLayout>} />
+          <Route path="/village/record" element={<ShellLayout><VoiceContribution /></ShellLayout>} />
+          <Route path="/village/draft/:entryId" element={<ShellLayout><DraftReview /></ShellLayout>} />
+          <Route path="/village/invite/:entryId" element={<ShellLayout><CoAuthorInvitation /></ShellLayout>} />
+          <Route path="/village/publish/:entryId" element={<ShellLayout><PublishApproval /></ShellLayout>} />
 
-        {/* Contributor track */}
-        <Route path="/contributor" element={<ShellLayout><ContributorDashboard /></ShellLayout>} />
-        <Route path="/contributor/scaffold/:scaffoldId" element={<ShellLayout><ScaffoldThreadView /></ShellLayout>} />
-        <Route path="/contributor/edit/:entryId" element={<ShellLayout><CollaborativeEditing /></ShellLayout>} />
-        <Route path="/contributor/profile" element={<ShellLayout><ContributionsProfile /></ShellLayout>} />
-        <Route path="/contributor/eligibility" element={<ShellLayout><VisitEligibility /></ShellLayout>} />
+          {/* Contributor track */}
+          <Route path="/contributor" element={<ShellLayout><ContributorDashboard /></ShellLayout>} />
+          <Route path="/contributor/scaffold/:scaffoldId" element={<ShellLayout><ScaffoldThreadView /></ShellLayout>} />
+          <Route path="/contributor/edit/:entryId" element={<ShellLayout><CollaborativeEditing /></ShellLayout>} />
+          <Route path="/contributor/profile" element={<ShellLayout><ContributionsProfile /></ShellLayout>} />
+          <Route path="/contributor/eligibility" element={<ShellLayout><VisitEligibility /></ShellLayout>} />
 
-        {/* Visitor track */}
-        <Route path="/visitor" element={<ShellLayout><VisitDiscovery /></ShellLayout>} />
-        <Route path="/visitor/booking" element={<ShellLayout><BookingFlow /></ShellLayout>} />
-        <Route path="/visitor/prep" element={<ShellLayout><PreVisitPrep /></ShellLayout>} />
-        <Route path="/visitor/itinerary" element={<ShellLayout><OnSiteItinerary /></ShellLayout>} />
-        <Route path="/visitor/certificate" element={<ShellLayout><PostVisitCertificate /></ShellLayout>} />
+          {/* Visitor track */}
+          <Route path="/visitor" element={<ShellLayout><VisitDiscovery /></ShellLayout>} />
+          <Route path="/visitor/booking" element={<ShellLayout><BookingFlow /></ShellLayout>} />
+          <Route path="/visitor/prep" element={<ShellLayout><PreVisitPrep /></ShellLayout>} />
+          <Route path="/visitor/itinerary" element={<ShellLayout><OnSiteItinerary /></ShellLayout>} />
+          <Route path="/visitor/certificate" element={<ShellLayout><PostVisitCertificate /></ShellLayout>} />
 
-        {/* Distribution & Operations */}
-        <Route path="/export" element={<ShellLayout><DerivativeGenerator /></ShellLayout>} />
-        <Route path="/revenue" element={<ShellLayout><RevenueDashboard /></ShellLayout>} />
-        <Route path="/activity" element={<ShellLayout><ActivityFeed /></ShellLayout>} />
-        <Route path="/settings" element={<ShellLayout><SettingsProfile /></ShellLayout>} />
-      </Routes>
+          {/* Distribution & Operations */}
+          <Route path="/export" element={<ShellLayout><DerivativeGenerator /></ShellLayout>} />
+          <Route path="/revenue" element={<ShellLayout><RevenueDashboard /></ShellLayout>} />
+          <Route path="/activity" element={<ShellLayout><ActivityFeed /></ShellLayout>} />
+          <Route path="/settings" element={<ShellLayout><SettingsProfile /></ShellLayout>} />
+        </Routes>
+      </EntriesProvider>
     </RoleProvider>
   )
 }
