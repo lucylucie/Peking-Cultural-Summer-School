@@ -10,6 +10,7 @@ import ArchiveExplorer from './screens/shared/ArchiveExplorer'
 import ArchiveEntryDetail from './screens/shared/ArchiveEntryDetail'
 import CommonsDirectory from './screens/shared/CommonsDirectory'
 import PersonProfile from './screens/shared/PersonProfile'
+import AITransparency from './screens/shared/AITransparency'
 
 import VillageDashboard from './screens/village/VillageDashboard'
 import VoiceContribution from './screens/village/VoiceContribution'
@@ -53,6 +54,7 @@ function App() {
           <Route path="/archive/:entryId" element={<ShellLayout><ArchiveEntryDetail /></ShellLayout>} />
           <Route path="/people" element={<ShellLayout><CommonsDirectory /></ShellLayout>} />
           <Route path="/people/:personId" element={<ShellLayout><PersonProfile /></ShellLayout>} />
+          <Route path="/ai-transparency" element={<ShellLayout><AITransparency /></ShellLayout>} />
 
           {/* Village Author track */}
           <Route path="/village" element={<ShellLayout><VillageDashboard /></ShellLayout>} />

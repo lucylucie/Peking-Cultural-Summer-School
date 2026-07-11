@@ -73,6 +73,13 @@ export default function SettingsProfile() {
         </div>
       )}
 
+      <div className="mt-6 rounded bg-white p-4">
+        <Link to="/ai-transparency" className="flex items-center justify-between text-sm font-medium">
+          How AI Helps Here
+          <span className="text-terracotta">→</span>
+        </Link>
+      </div>
+
       <div className="mt-6">
         <label className="text-sm font-medium">Language preference</label>
         <select

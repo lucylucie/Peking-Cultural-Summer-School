@@ -145,6 +145,8 @@ These are stated in the brief but restated here because they must survive every 
 
 6. **The Commons Directory shows credited relationships, not social ones.** No messaging, no follow/connect mechanics, no direct contact between users anywhere in the app. Payment exists only inside the visit booking flow (Screen 17) — never peer-to-peer, never inside a profile view.
 
+7. **No AI-generated imagery of unphotographed cultural content.** AI may enhance, format, or lay out real captured photos and real entry data (infographics, crop/color adjustment). It may never generate illustrative imagery depicting a dish, ritual, or practice that wasn't actually photographed or documented by a real contributor. If a visual doesn't exist, show an honest empty state, not an AI substitute. *Scope note:* this governs the product's in-fiction AI features (Content Studio, Infographic Generator) — it does not retroactively apply to `DishIllustration`/`PersonAvatar`, which are the app's static hand-drawn design system (authored once, applied uniformly, never presented as "AI generated a photo of your dish"), not a runtime AI capability a user invokes. If a future screen makes that distinction unclear, flag it rather than defaulting toward generating something.
+
 ---
 
 ## Definition of done (per screen)

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import { Camera, Video, Mic, Square, X } from 'lucide-react'
+import { Camera, Video, Mic, Square, X, Crop } from 'lucide-react'
 import { useEntries } from '../../lib/EntriesContext'
 import { useRole } from '../../lib/RoleContext'
 import { currentUserForRole } from '../../lib/currentUser'
@@ -68,6 +69,7 @@ export default function ContentStudio({
   const [entryId, setEntryId] = useState(scopedEntryId ?? defaultEntryId ?? '')
   const [entryFilter, setEntryFilter] = useState('')
   const [createdEntry, setCreatedEntry] = useState(null)
+  const [enhanceChoice, setEnhanceChoice] = useState('original')
 
   const selectedEntry = createNew ? createdEntry : entries.find((e) => e.id === entryId)
   const needsTranslation = me?.language && me.language !== ENTRY_LANGUAGE
@@ -180,6 +182,7 @@ export default function ContentStudio({
     setTranscriptEdited(false)
     setTranslation('')
     setTranslationEdited(false)
+    setEnhanceChoice('original')
   }
 
   const filteredEntries = entries.filter((e) =>
@@ -274,6 +277,48 @@ export default function ContentStudio({
             </div>
           </div>
 
+          {mode === 'photo' && (
+            <div>
+              <div className="flex items-center justify-between">
+                <label className="text-sm font-medium">Enhance (optional)</label>
+                <AiLabel>AI-suggested crop &amp; color</AiLabel>
+              </div>
+              <p className="mt-1 text-xs text-ink/50">
+                Crop and color adjustment only — your photo's content is never altered or
+                regenerated. Keeping the original is the default.
+              </p>
+              <div className="mt-2 grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => setEnhanceChoice('original')}
+                  className={clsx(
+                    'rounded border-2 p-3 text-left',
+                    enhanceChoice === 'original' ? 'border-terracotta' : 'border-transparent bg-white'
+                  )}
+                >
+                  <div className="flex aspect-video items-center justify-center rounded bg-ink/10 text-ink/30">
+                    <Camera size={24} strokeWidth={1.2} />
+                  </div>
+                  <p className="mt-2 text-xs font-medium">Original</p>
+                </button>
+                <button
+                  onClick={() => setEnhanceChoice('enhanced')}
+                  className={clsx(
+                    'rounded border-2 p-3 text-left',
+                    enhanceChoice === 'enhanced' ? 'border-terracotta' : 'border-transparent bg-white'
+                  )}
+                >
+                  <div className="flex aspect-video items-center justify-center rounded bg-ochre/10 text-ink/30">
+                    <Crop size={24} strokeWidth={1.2} />
+                  </div>
+                  <p className="mt-2 text-xs font-medium">Suggested crop &amp; color</p>
+                </button>
+              </div>
+              <p className="mt-1.5 text-xs text-moss">
+                Using: {enhanceChoice === 'original' ? 'Original photo' : 'Suggested enhancement'}
+              </p>
+            </div>
+          )}
+
           <div>
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium">Caption</label>
@@ -285,6 +330,9 @@ export default function ContentStudio({
               rows={2}
               className="mt-2 w-full rounded border border-ink/20 bg-white p-3 text-sm"
             />
+            <Link to="/ai-transparency" className="mt-1.5 inline-block text-xs text-terracotta">
+              How AI helps here →
+            </Link>
           </div>
 
           {mode !== 'photo' && (
