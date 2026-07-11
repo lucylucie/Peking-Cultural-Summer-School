@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { useEntries } from '../../lib/EntriesContext'
 import { findUserById } from '../../data/users'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 const FORMATS = [
   { id: 'video', label: 'Short video card' },
@@ -85,14 +86,13 @@ export default function DerivativeGenerator() {
             <div className="mt-6">
               <p className="text-sm font-medium">Preview</p>
               <div className="mt-2 rounded bg-white p-5">
-                <div
-                  className={clsx(
-                    'flex items-center justify-center bg-ink/10 text-xs text-ink/40',
-                    format === 'quote' ? 'aspect-[4/5]' : 'aspect-[9/16] max-w-[220px]'
-                  )}
-                >
+                <p className="mb-2 text-xs uppercase tracking-wide text-ink/40">
                   {FORMATS.find((f) => f.id === format)?.label}
-                </div>
+                </p>
+                <DishIllustration
+                  dishSlug={entry.dishSlug}
+                  className={clsx('rounded', format === 'quote' ? 'aspect-[4/5]' : 'aspect-[9/16] max-w-[220px]')}
+                />
                 {format === 'quote' ? (
                   <p className="mt-4 font-serif text-lg italic">"{entry.sections.origin}"</p>
                 ) : (

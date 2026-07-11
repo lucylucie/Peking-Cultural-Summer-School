@@ -4,6 +4,7 @@ import { useEntries } from '../../lib/EntriesContext'
 import AuthorAttribution from '../../components/shared/AuthorAttribution'
 import EntrySections from '../../components/shared/EntrySections'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 const DISH_TO_SCAFFOLD = {
   'che-lam': 'scaffold-tet-sweets',
@@ -30,7 +31,7 @@ export default function ArchiveEntryDetail() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
-      <div className="aspect-[16/9] w-full rounded bg-ink/10" aria-hidden="true" />
+      <DishIllustration dishSlug={entry.dishSlug} className="aspect-[16/9] w-full rounded" />
 
       <div className="mt-6">
         <h1 className="text-3xl">{entry.title.en}</h1>
