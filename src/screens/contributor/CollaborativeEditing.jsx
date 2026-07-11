@@ -5,6 +5,8 @@ import { useEntries } from '../../lib/EntriesContext'
 import { CURRENT_CONTRIBUTOR_ID } from '../../lib/currentUser'
 import { findUserById } from '../../data/users'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import PersonAvatar from '../../components/shared/PersonAvatar'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 export default function CollaborativeEditing() {
   const { entryId } = useParams()
@@ -45,8 +47,12 @@ export default function CollaborativeEditing() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
-      <h1 className="text-2xl">{entry.title.en}</h1>
-      <p className="text-sm text-ink/60">Working with {primaryAuthor?.name}'s recording</p>
+      <DishIllustration dishSlug={entry.dishSlug} className="aspect-[16/9] w-full rounded" />
+      <h1 className="mt-4 text-2xl">{entry.title.en}</h1>
+      <div className="mt-1 flex items-center gap-2">
+        <PersonAvatar userId={entry.primaryAuthor} size={24} />
+        <p className="text-sm text-ink/60">Working with {primaryAuthor?.name}'s recording</p>
+      </div>
 
       <div className="mt-6 rounded bg-white p-4">
         <p className="text-xs font-medium uppercase tracking-wide text-ink/50">

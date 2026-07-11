@@ -7,6 +7,7 @@ import AuthorAttribution from '../../components/shared/AuthorAttribution'
 import EntrySections from '../../components/shared/EntrySections'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import SecondaryButton from '../../components/shared/SecondaryButton'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 export default function PublishApproval() {
   const { entryId } = useParams()
@@ -48,7 +49,9 @@ export default function PublishApproval() {
         Pending your review — this is exactly how the entry will appear once published.
       </div>
 
-      <h1 className="mt-6 text-3xl">{entry.title.en}</h1>
+      <DishIllustration dishSlug={entry.dishSlug} className="mt-6 aspect-[16/9] w-full rounded" />
+
+      <h1 className="mt-4 text-3xl">{entry.title.en}</h1>
       <p className="mt-1 text-lg text-ink/70">{entry.title.vi}</p>
 
       <div className="mt-4">

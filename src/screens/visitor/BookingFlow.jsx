@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { useEntries } from '../../lib/EntriesContext'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import SecondaryButton from '../../components/shared/SecondaryButton'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 const DATE_RANGES = [
   { id: 'r2', label: 'Sep 7 – Sep 11' },
@@ -97,10 +98,11 @@ export default function BookingFlow() {
                 key={e.id}
                 onClick={() => setEntryId(e.id)}
                 className={clsx(
-                  'block w-full rounded border px-4 py-2 text-left text-sm',
+                  'flex w-full items-center gap-3 rounded border px-4 py-2 text-left text-sm',
                   entryId === e.id ? 'border-terracotta bg-white' : 'border-ink/20'
                 )}
               >
+                <DishIllustration dishSlug={e.dishSlug} className="h-10 w-14 shrink-0 rounded" />
                 {e.title.en}
               </button>
             ))}

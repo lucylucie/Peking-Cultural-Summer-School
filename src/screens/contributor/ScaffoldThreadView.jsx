@@ -6,6 +6,7 @@ import { useEntries } from '../../lib/EntriesContext'
 import { CURRENT_CONTRIBUTOR_ID } from '../../lib/currentUser'
 import { scaffoldCommentTypeLabels, scaffoldTagLabels } from '../../lib/tokens'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import PersonAvatar from '../../components/shared/PersonAvatar'
 
 export default function ScaffoldThreadView() {
   const { scaffoldId } = useParams()
@@ -69,7 +70,10 @@ export default function ScaffoldThreadView() {
           return (
             <li key={c.id} className="rounded bg-white p-4">
               <div className="flex items-center justify-between">
-                <p className="text-sm font-medium">{author?.name ?? 'Unknown'}</p>
+                <div className="flex items-center gap-2">
+                  <PersonAvatar userId={c.authorId} size={28} />
+                  <p className="text-sm font-medium">{author?.name ?? 'Unknown'}</p>
+                </div>
                 <span className="text-xs text-moss">
                   {scaffoldCommentTypeLabels[c.type] ?? c.type}
                 </span>

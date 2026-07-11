@@ -9,6 +9,7 @@ import {
   CURRENT_VISITOR_ID,
 } from '../../lib/currentUser'
 import SecondaryButton from '../../components/shared/SecondaryButton'
+import PersonAvatar from '../../components/shared/PersonAvatar'
 
 const ROLE_LABEL = {
   [ROLES.VILLAGE]: 'Village Author',
@@ -40,7 +41,7 @@ export default function SettingsProfile() {
       <h1 className="text-2xl">Settings</h1>
 
       <div className="mt-6 flex items-center gap-4">
-        <div className="h-16 w-16 shrink-0 rounded-full bg-ink/10" aria-hidden="true" />
+        <PersonAvatar userId={me?.id} size={64} />
         <div>
           <p className="font-serif text-lg">{me?.name}</p>
           <span className="mt-1 inline-block rounded bg-ochre/20 px-2 py-0.5 text-xs text-ink">

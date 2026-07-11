@@ -4,6 +4,8 @@ import { CURRENT_VISITOR_ID } from '../../lib/currentUser'
 import { findUserById } from '../../data/users'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import SecondaryButton from '../../components/shared/SecondaryButton'
+import PersonAvatar from '../../components/shared/PersonAvatar'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 export default function PostVisitCertificate() {
   const location = useLocation()
@@ -43,19 +45,25 @@ export default function PostVisitCertificate() {
           </PrimaryButton>
         </div>
       ) : (
-        <div className="mt-6 rounded bg-white p-6">
-          <p className="text-xs uppercase tracking-wide text-ink/50">Certificate of Contribution</p>
-          <h2 className="mt-2 font-serif text-2xl">{entry.title.en}</h2>
-          <p className="text-ink/60">{entry.title.vi}</p>
-          <p className="mt-4 text-sm text-ink/80">
-            {me?.name} contributed to this entry's origin story during a co-authoring residency at
-            Duong Lam, and now appears in its permanent co-author record.
-          </p>
-          <div className="mt-6 flex gap-3">
-            <SecondaryButton as={Link} to={`/archive/${entry.id}`}>
-              View in Archive
-            </SecondaryButton>
-            <PrimaryButton onClick={() => window.print()}>Download</PrimaryButton>
+        <div className="mt-6 overflow-hidden rounded bg-white">
+          <DishIllustration dishSlug={entry.dishSlug} className="aspect-[16/9] w-full" />
+          <div className="p-6">
+            <p className="text-xs uppercase tracking-wide text-ink/50">Certificate of Contribution</p>
+            <h2 className="mt-2 font-serif text-2xl">{entry.title.en}</h2>
+            <p className="text-ink/60">{entry.title.vi}</p>
+            <div className="mt-4 flex items-center gap-3">
+              <PersonAvatar userId={me?.id} size={36} />
+              <p className="text-sm text-ink/80">
+                {me?.name} contributed to this entry's origin story during a co-authoring residency
+                at Duong Lam, and now appears in its permanent co-author record.
+              </p>
+            </div>
+            <div className="mt-6 flex gap-3">
+              <SecondaryButton as={Link} to={`/archive/${entry.id}`}>
+                View in Archive
+              </SecondaryButton>
+              <PrimaryButton onClick={() => window.print()}>Download</PrimaryButton>
+            </div>
           </div>
         </div>
       )}

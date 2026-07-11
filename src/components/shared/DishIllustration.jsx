@@ -113,18 +113,19 @@ const ILLUSTRATIONS = {
   'che-kho': CheKho,
 }
 
+// Tints are low-opacity mixes of the existing palette colors, not new hues.
 const TINTS = {
-  'che-lam': '#f3ede0',
-  tuong: '#eef0e9',
-  'banh-te': '#eef0e9',
-  'keo-doi': '#f6ece4',
-  'ga-mia': '#f1ede6',
-  'che-kho': '#eef0e9',
+  'che-lam': 'rgba(184, 80, 66, 0.08)', // terracotta
+  tuong: 'rgba(74, 93, 69, 0.08)', // moss
+  'banh-te': 'rgba(74, 93, 69, 0.08)', // moss
+  'keo-doi': 'rgba(201, 162, 75, 0.12)', // ochre
+  'ga-mia': 'rgba(43, 36, 32, 0.06)', // ink
+  'che-kho': 'rgba(74, 93, 69, 0.08)', // moss
 }
 
 export default function DishIllustration({ dishSlug, className }) {
   const Illustration = ILLUSTRATIONS[dishSlug]
-  const tint = TINTS[dishSlug] ?? '#eee9d8'
+  const tint = TINTS[dishSlug] ?? 'rgba(43, 36, 32, 0.05)'
 
   if (!Illustration) {
     return <div className={className} style={{ backgroundColor: tint }} aria-hidden="true" />

@@ -4,6 +4,7 @@ import { useEntries } from '../../lib/EntriesContext'
 import { findUserById } from '../../data/users'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import SecondaryButton from '../../components/shared/SecondaryButton'
+import PersonAvatar from '../../components/shared/PersonAvatar'
 
 export default function PreVisitPrep() {
   const location = useLocation()
@@ -20,8 +21,11 @@ export default function PreVisitPrep() {
 
       <div className="mt-6 rounded bg-white p-4">
         <p className="text-xs font-medium uppercase tracking-wide text-ink/50">Your host</p>
-        <p className="mt-1 font-serif text-lg">{host?.name}</p>
-        <p className="mt-1 text-sm text-ink/70">{host?.bio}</p>
+        <div className="mt-2 flex items-center gap-3">
+          <PersonAvatar userId={host?.id} size={48} />
+          <p className="font-serif text-lg">{host?.name}</p>
+        </div>
+        <p className="mt-2 text-sm text-ink/70">{host?.bio}</p>
         {entry && (
           <p className="mt-2 text-xs text-moss">
             Known for {entry.title.en} ({entry.title.vi})

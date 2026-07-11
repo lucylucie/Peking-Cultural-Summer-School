@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEntries } from '../../lib/EntriesContext'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 const DATE_RANGES = [
   { id: 'r1', label: 'Aug 10 – Aug 14', booked: true },
@@ -27,11 +28,14 @@ export default function VisitDiscovery() {
         </h2>
         <ul className="mt-2 space-y-2">
           {publishedEntries.slice(0, 2).map((e) => (
-            <li key={e.id} className="rounded bg-white p-3 text-sm">
-              <Link to={`/archive/${e.id}`} className="font-medium text-terracotta">
-                {e.title.en}
-              </Link>
-              <span className="text-ink/60"> — {e.contributionCount} contributions recorded</span>
+            <li key={e.id} className="flex items-center gap-3 rounded bg-white p-3 text-sm">
+              <DishIllustration dishSlug={e.dishSlug} className="h-10 w-14 shrink-0 rounded" />
+              <div>
+                <Link to={`/archive/${e.id}`} className="font-medium text-terracotta">
+                  {e.title.en}
+                </Link>
+                <span className="text-ink/60"> — {e.contributionCount} contributions recorded</span>
+              </div>
             </li>
           ))}
         </ul>

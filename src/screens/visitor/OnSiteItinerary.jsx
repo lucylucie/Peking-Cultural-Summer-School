@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import TimeOfDayIcon from '../../components/shared/TimeOfDayIcon'
 
 const BLOCKS = [
   {
@@ -44,9 +45,12 @@ export default function OnSiteItinerary() {
               onClick={() => setExpanded(expanded === b.id ? null : b.id)}
               className="flex w-full items-center justify-between text-left"
             >
-              <div>
-                <p className="text-xs uppercase tracking-wide text-ink/50">{b.label}</p>
-                <p className="font-serif text-lg">{b.title}</p>
+              <div className="flex items-center gap-3">
+                <TimeOfDayIcon time={b.id} />
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-ink/50">{b.label}</p>
+                  <p className="font-serif text-lg">{b.title}</p>
+                </div>
               </div>
               {checked[b.id] && <span className="text-xs text-moss">Complete</span>}
             </button>

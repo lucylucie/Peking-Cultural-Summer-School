@@ -4,6 +4,8 @@ import { CURRENT_VILLAGE_AUTHOR_ID } from '../../lib/currentUser'
 import { findUserById } from '../../data/users'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import StatusDot from '../../components/shared/StatusDot'
+import PersonAvatar from '../../components/shared/PersonAvatar'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 const STATUS_LABEL = {
   draft: 'Draft',
@@ -25,7 +27,10 @@ export default function VillageDashboard() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
-      <h1 className="text-2xl">Chào, {me?.name ?? 'Village Author'}</h1>
+      <div className="flex items-center gap-3">
+        <PersonAvatar userId={me?.id} size={48} />
+        <h1 className="text-2xl">Chào, {me?.name ?? 'Village Author'}</h1>
+      </div>
 
       {awaitingApproval.length > 0 && (
         <Link
@@ -55,8 +60,11 @@ export default function VillageDashboard() {
           <ul className="mt-3 divide-y divide-ink/10 rounded bg-white">
             {myEntries.map((entry) => (
               <li key={entry.id}>
-                <Link to={entryLink(entry)} className="flex items-center justify-between px-4 py-3">
-                  <span>{entry.title.en}</span>
+                <Link to={entryLink(entry)} className="flex items-center justify-between gap-3 px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <DishIllustration dishSlug={entry.dishSlug} className="h-10 w-14 rounded" />
+                    <span>{entry.title.en}</span>
+                  </div>
                   {entry.status === 'draft' ? (
                     <StatusDot label="Draft" />
                   ) : (

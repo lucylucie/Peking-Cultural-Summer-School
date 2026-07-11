@@ -4,6 +4,8 @@ import { CURRENT_CONTRIBUTOR_ID } from '../../lib/currentUser'
 import { findUserById } from '../../data/users'
 import { contributionTypeLabels } from '../../lib/tokens'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import PersonAvatar from '../../components/shared/PersonAvatar'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 export default function ContributionsProfile() {
   const { entries } = useEntries()
@@ -14,8 +16,11 @@ export default function ContributionsProfile() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
-      <h1 className="text-2xl">{me?.name}</h1>
-      <p className="mt-1 text-sm text-ink/60">{me?.bio}</p>
+      <div className="flex items-center gap-3">
+        <PersonAvatar userId={me?.id} size={56} />
+        <h1 className="text-2xl">{me?.name}</h1>
+      </div>
+      <p className="mt-3 text-sm text-ink/60">{me?.bio}</p>
       <p className="mt-3 text-sm text-moss">
         Credited in {creditedEntries.length} archive {creditedEntries.length === 1 ? 'entry' : 'entries'} ·{' '}
         {me?.contributionCount} contributions total
@@ -37,8 +42,11 @@ export default function ContributionsProfile() {
             const c = e.coAuthors.find((co) => co.id === CURRENT_CONTRIBUTOR_ID)
             return (
               <li key={e.id}>
-                <Link to={`/archive/${e.id}`} className="flex items-center justify-between px-4 py-3">
-                  <span>{e.title.en}</span>
+                <Link to={`/archive/${e.id}`} className="flex items-center justify-between gap-3 px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <DishIllustration dishSlug={e.dishSlug} className="h-10 w-14 rounded" />
+                    <span>{e.title.en}</span>
+                  </div>
                   <span className="text-xs text-moss">
                     {contributionTypeLabels[c.contribution] ?? c.contribution}
                   </span>

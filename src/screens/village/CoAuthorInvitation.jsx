@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { useEntries } from '../../lib/EntriesContext'
 import { contributors } from '../../data/users'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import PersonAvatar from '../../components/shared/PersonAvatar'
 
 const SUGGESTED_IDS = ['co-anh', 'co-mai', 'co-huong']
 
@@ -49,10 +50,13 @@ export default function CoAuthorInvitation() {
           const isInvited = invited.includes(c.id)
           return (
             <li key={c.id} className="flex items-center justify-between gap-4 px-4 py-3">
-              <div>
-                <p className="text-sm font-medium">{c.name}</p>
-                <p className="text-xs text-ink/60">{c.bio}</p>
-                <p className="mt-0.5 text-xs text-moss">{c.contributionCount} prior contributions</p>
+              <div className="flex items-center gap-3">
+                <PersonAvatar userId={c.id} size={40} />
+                <div>
+                  <p className="text-sm font-medium">{c.name}</p>
+                  <p className="text-xs text-ink/60">{c.bio}</p>
+                  <p className="mt-0.5 text-xs text-moss">{c.contributionCount} prior contributions</p>
+                </div>
               </div>
               <button
                 onClick={() => toggleInvite(c.id)}

@@ -5,6 +5,7 @@ import { useEntries } from '../../lib/EntriesContext'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import SecondaryButton from '../../components/shared/SecondaryButton'
 import AiLabel from '../../components/shared/AiLabel'
+import DishIllustration from '../../components/shared/DishIllustration'
 
 export default function DraftReview() {
   const { entryId } = useParams()
@@ -41,7 +42,8 @@ export default function DraftReview() {
         This is a draft — nothing is public yet.
       </div>
 
-      <h1 className="mt-6 text-2xl">{entry.title.en}</h1>
+      <DishIllustration dishSlug={entry.dishSlug} className="mt-4 aspect-[16/9] w-full rounded" />
+      <h1 className="mt-4 text-2xl">{entry.title.en}</h1>
 
       {entry.audioUrl && (
         <button className="mt-3 inline-flex items-center gap-2 rounded border border-ink/20 px-4 py-2 text-sm hover:bg-white">
