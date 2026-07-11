@@ -2,12 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ROLES, useRole } from '../../lib/RoleContext'
 import { useEntries } from '../../lib/EntriesContext'
-import { findUserById } from '../../data/users'
-import {
-  CURRENT_VILLAGE_AUTHOR_ID,
-  CURRENT_CONTRIBUTOR_ID,
-  CURRENT_VISITOR_ID,
-} from '../../lib/currentUser'
+import { CURRENT_CONTRIBUTOR_ID, currentUserForRole } from '../../lib/currentUser'
 import SecondaryButton from '../../components/shared/SecondaryButton'
 import PersonAvatar from '../../components/shared/PersonAvatar'
 
@@ -17,17 +12,11 @@ const ROLE_LABEL = {
   [ROLES.VISITOR]: 'Visitor',
 }
 
-function currentUserFor(role) {
-  if (role === ROLES.VILLAGE) return findUserById(CURRENT_VILLAGE_AUTHOR_ID)
-  if (role === ROLES.CONTRIBUTOR) return findUserById(CURRENT_CONTRIBUTOR_ID)
-  return findUserById(CURRENT_VISITOR_ID)
-}
-
 export default function SettingsProfile() {
   const { role } = useRole()
   const { entries } = useEntries()
   const navigate = useNavigate()
-  const me = currentUserFor(role)
+  const me = currentUserForRole(role)
   const [language, setLanguage] = useState('Vietnamese')
   const [notifications, setNotifications] = useState(true)
 

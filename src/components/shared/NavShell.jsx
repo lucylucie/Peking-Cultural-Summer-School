@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import clsx from 'clsx'
-import { Home, Mic, Compass, User, ListChecks, MapPin, Archive } from 'lucide-react'
+import { Home, Mic, Compass, User, ListChecks, MapPin, Archive, Users } from 'lucide-react'
 import { ROLES, useRole } from '../../lib/RoleContext'
 import RoleSwitcher from './RoleSwitcher'
 
@@ -9,18 +9,21 @@ const NAV_ITEMS = {
     { to: '/village', label: 'Home', icon: Home, end: true },
     { to: '/village/record', label: 'Contribute', icon: Mic },
     { to: '/village', label: 'My Entries', icon: ListChecks },
+    { to: '/people', label: 'People', icon: Users },
     { to: '/settings', label: 'Profile', icon: User },
   ],
   [ROLES.CONTRIBUTOR]: [
     { to: '/contributor', label: 'Explore', icon: Compass, end: true },
     { to: '/contributor/profile', label: 'My Contributions', icon: ListChecks },
     { to: '/contributor/eligibility', label: 'Visit', icon: MapPin },
+    { to: '/people', label: 'People', icon: Users },
     { to: '/settings', label: 'Profile', icon: User },
   ],
   [ROLES.VISITOR]: [
     { to: '/visitor', label: 'Discover', icon: Compass, end: true },
     { to: '/visitor/itinerary', label: 'My Visit', icon: MapPin },
     { to: '/archive', label: 'Archive', icon: Archive },
+    { to: '/people', label: 'People', icon: Users },
     { to: '/settings', label: 'Profile', icon: User },
   ],
 }

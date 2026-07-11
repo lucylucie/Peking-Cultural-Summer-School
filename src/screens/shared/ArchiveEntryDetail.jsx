@@ -5,6 +5,7 @@ import AuthorAttribution from '../../components/shared/AuthorAttribution'
 import EntrySections from '../../components/shared/EntrySections'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import DishIllustration from '../../components/shared/DishIllustration'
+import VillageMap from '../../components/shared/VillageMap'
 
 const DISH_TO_SCAFFOLD = {
   'che-lam': 'scaffold-tet-sweets',
@@ -40,6 +41,11 @@ export default function ArchiveEntryDetail() {
       </div>
 
       <AuthorAttribution entry={entry} className="mt-4" />
+
+      <div className="mt-4">
+        <p className="text-xs font-medium uppercase tracking-wide text-ink/50">Where this comes from</p>
+        <VillageMap mode="single" entryId={entry.id} className="mt-2 h-28 w-full" />
+      </div>
 
       {entry.audioUrl && (
         <button className="mt-4 inline-flex items-center gap-2 rounded border border-ink/20 px-4 py-2 text-sm hover:bg-white">

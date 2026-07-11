@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import SecondaryButton from '../../components/shared/SecondaryButton'
 import TimeOfDayIcon from '../../components/shared/TimeOfDayIcon'
+import ContentStudio from '../../components/shared/ContentStudio'
+import VillageMap from '../../components/shared/VillageMap'
 
 const BLOCKS = [
   {
@@ -29,14 +32,23 @@ export default function OnSiteItinerary() {
   const location = useLocation()
   const navigate = useNavigate()
   const entryId = location.state?.entryId ?? 'entry-che-lam'
+  const paid = location.state?.paid ?? false
   const [expanded, setExpanded] = useState(null)
   const [checked, setChecked] = useState({})
+  const [studioBlock, setStudioBlock] = useState(null)
 
   const allComplete = BLOCKS.every((b) => checked[b.id])
 
   return (
     <div className="mx-auto max-w-xl px-4 py-8">
       <h1 className="text-2xl">Today's Itinerary</h1>
+
+      <VillageMap
+        mode="itinerary"
+        itineraryEntryIds={[entryId]}
+        currentEntryId={entryId}
+        className="mt-4 h-36 w-full"
+      />
 
       <ul className="mt-6 space-y-3">
         {BLOCKS.map((b) => (
@@ -57,17 +69,22 @@ export default function OnSiteItinerary() {
             {expanded === b.id && (
               <div className="mt-3 border-t border-ink/10 pt-3">
                 <p className="text-sm text-ink/80">{b.detail}</p>
-                <button
-                  onClick={() => setChecked((prev) => ({ ...prev, [b.id]: !prev[b.id] }))}
-                  className={clsx(
-                    'mt-3 rounded border px-3 py-1.5 text-xs',
-                    checked[b.id]
-                      ? 'border-moss bg-moss text-white'
-                      : 'border-ink/20 text-ink/70 hover:bg-cream'
-                  )}
-                >
-                  {checked[b.id] ? 'Checked in' : 'Check in'}
-                </button>
+                <div className="mt-3 flex gap-2">
+                  <button
+                    onClick={() => setChecked((prev) => ({ ...prev, [b.id]: !prev[b.id] }))}
+                    className={clsx(
+                      'rounded border px-3 py-1.5 text-xs',
+                      checked[b.id]
+                        ? 'border-moss bg-moss text-white'
+                        : 'border-ink/20 text-ink/70 hover:bg-cream'
+                    )}
+                  >
+                    {checked[b.id] ? 'Checked in' : 'Check in'}
+                  </button>
+                  <SecondaryButton onClick={() => setStudioBlock(b)} className="px-3 py-1.5 text-xs">
+                    Capture
+                  </SecondaryButton>
+                </div>
               </div>
             )}
           </li>
@@ -77,10 +94,18 @@ export default function OnSiteItinerary() {
       <PrimaryButton
         className="mt-6"
         disabled={!allComplete}
-        onClick={() => navigate('/visitor/certificate', { state: { entryId } })}
+        onClick={() => navigate('/visitor/certificate', { state: { entryId, paid } })}
       >
         Complete Visit
       </PrimaryButton>
+
+      {studioBlock && (
+        <ContentStudio
+          scopedEntryId={entryId}
+          scopedLabel={`${studioBlock.label} — ${studioBlock.title}`}
+          onClose={() => setStudioBlock(null)}
+        />
+      )}
     </div>
   )
 }

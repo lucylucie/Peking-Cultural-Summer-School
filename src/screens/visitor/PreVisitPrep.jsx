@@ -1,9 +1,7 @@
-import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEntries } from '../../lib/EntriesContext'
 import { findUserById } from '../../data/users'
 import PrimaryButton from '../../components/shared/PrimaryButton'
-import SecondaryButton from '../../components/shared/SecondaryButton'
 import PersonAvatar from '../../components/shared/PersonAvatar'
 
 export default function PreVisitPrep() {
@@ -11,13 +9,16 @@ export default function PreVisitPrep() {
   const navigate = useNavigate()
   const { getEntry } = useEntries()
   const entryId = location.state?.entryId ?? 'entry-che-lam'
+  const paid = location.state?.paid ?? false
   const entry = getEntry(entryId)
   const host = entry ? findUserById(entry.primaryAuthor) : null
-  const [messageSent, setMessageSent] = useState(false)
 
   return (
     <div className="mx-auto max-w-xl px-4 py-8">
       <h1 className="text-2xl">Getting ready for your visit</h1>
+      {paid && (
+        <p className="mt-1 text-xs text-moss">Payment confirmed for this residency.</p>
+      )}
 
       <div className="mt-6 rounded bg-white p-4">
         <p className="text-xs font-medium uppercase tracking-wide text-ink/50">Your host</p>
@@ -31,13 +32,10 @@ export default function PreVisitPrep() {
             Known for {entry.title.en} ({entry.title.vi})
           </p>
         )}
-        <SecondaryButton
-          onClick={() => setMessageSent(true)}
-          disabled={messageSent}
-          className="mt-3"
-        >
-          {messageSent ? 'Message sent' : 'Message your host'}
-        </SecondaryButton>
+        <p className="mt-3 text-xs text-ink/50">
+          Your host will be introduced to you on arrival — there's no direct messaging in this
+          prototype.
+        </p>
       </div>
 
       <div className="mt-6">
@@ -55,7 +53,7 @@ export default function PreVisitPrep() {
 
       <PrimaryButton
         className="mt-6"
-        onClick={() => navigate('/visitor/itinerary', { state: { entryId } })}
+        onClick={() => navigate('/visitor/itinerary', { state: { entryId, paid } })}
       >
         View Itinerary
       </PrimaryButton>

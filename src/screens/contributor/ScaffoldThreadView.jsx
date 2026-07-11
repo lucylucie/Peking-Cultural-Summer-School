@@ -6,7 +6,9 @@ import { useEntries } from '../../lib/EntriesContext'
 import { CURRENT_CONTRIBUTOR_ID } from '../../lib/currentUser'
 import { scaffoldCommentTypeLabels, scaffoldTagLabels } from '../../lib/tokens'
 import PrimaryButton from '../../components/shared/PrimaryButton'
+import SecondaryButton from '../../components/shared/SecondaryButton'
 import PersonAvatar from '../../components/shared/PersonAvatar'
+import ContentStudio from '../../components/shared/ContentStudio'
 
 export default function ScaffoldThreadView() {
   const { scaffoldId } = useParams()
@@ -15,6 +17,7 @@ export default function ScaffoldThreadView() {
   const [comments, setComments] = useState(scaffold?.comments ?? [])
   const [draft, setDraft] = useState('')
   const [flagged, setFlagged] = useState({})
+  const [studioOpen, setStudioOpen] = useState(false)
 
   if (!scaffold) {
     return (
@@ -62,7 +65,18 @@ export default function ScaffoldThreadView() {
             </span>
           ))}
         </div>
+        <SecondaryButton onClick={() => setStudioOpen(true)} className="mt-4">
+          Add media to this contribution
+        </SecondaryButton>
       </div>
+
+      {studioOpen && (
+        <ContentStudio
+          scopedLabel={scaffold.prompt}
+          defaultEntryId={scaffold.graduatedTo ?? null}
+          onClose={() => setStudioOpen(false)}
+        />
+      )}
 
       <ul className="mt-6 space-y-4">
         {comments.map((c) => {

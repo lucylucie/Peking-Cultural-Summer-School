@@ -30,3 +30,11 @@ export const revenue = {
 export function getRevenueForAuthor(authorId) {
   return revenue[authorId]
 }
+
+// Per Slide 15's revenue model — used at checkout in the booking flow.
+export const VISIT_FEE_PER_GUEST = 1200000
+export const BOOKING_SPLIT = {
+  village: 60,
+  platform: 25,
+  contributorPool: 15,
+}

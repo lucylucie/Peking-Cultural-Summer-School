@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import { useEntries } from '../../lib/EntriesContext'
+import { VISIT_FEE_PER_GUEST, BOOKING_SPLIT } from '../../data/revenue'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import SecondaryButton from '../../components/shared/SecondaryButton'
 import DishIllustration from '../../components/shared/DishIllustration'
@@ -11,7 +12,35 @@ const DATE_RANGES = [
   { id: 'r3', label: 'Oct 12 – Oct 16' },
 ]
 
-const STEP_LABELS = ['Dates', 'Practice', 'Confirm']
+const STEP_LABELS = ['Dates', 'Practice', 'Pay & Confirm']
+
+function formatVnd(amount) {
+  return new Intl.NumberFormat('vi-VN').format(amount) + ' ₫'
+}
+
+function SplitBreakdown({ total }) {
+  return (
+    <div className="mt-3 rounded bg-moss/10 p-3 text-sm">
+      <p className="text-xs font-medium uppercase tracking-wide text-moss">
+        Where this payment goes
+      </p>
+      <ul className="mt-2 space-y-1">
+        <li className="flex justify-between">
+          <span>Village-side ({BOOKING_SPLIT.village}%)</span>
+          <span>{formatVnd(Math.round((total * BOOKING_SPLIT.village) / 100))}</span>
+        </li>
+        <li className="flex justify-between">
+          <span>Platform ({BOOKING_SPLIT.platform}%)</span>
+          <span>{formatVnd(Math.round((total * BOOKING_SPLIT.platform) / 100))}</span>
+        </li>
+        <li className="flex justify-between">
+          <span>Contributor pool ({BOOKING_SPLIT.contributorPool}%)</span>
+          <span>{formatVnd(Math.round((total * BOOKING_SPLIT.contributorPool) / 100))}</span>
+        </li>
+      </ul>
+    </div>
+  )
+}
 
 export default function BookingFlow() {
   const navigate = useNavigate()
@@ -22,20 +51,31 @@ export default function BookingFlow() {
   const [entryId, setEntryId] = useState(null)
   const [confirmed, setConfirmed] = useState(false)
 
+  const [cardName, setCardName] = useState('')
+  const [cardNumber, setCardNumber] = useState('')
+  const [cardExpiry, setCardExpiry] = useState('')
+
   const selectedDate = DATE_RANGES.find((d) => d.id === dateId)
   const selectedEntry = publishedEntries.find((e) => e.id === entryId)
+  const totalFee = VISIT_FEE_PER_GUEST * groupSize
+  const paymentValid = cardName.trim() && cardNumber.trim().length >= 12 && cardExpiry.trim()
 
   if (confirmed) {
     return (
       <div className="mx-auto max-w-xl px-4 py-8">
-        <h1 className="text-2xl">Booking confirmed</h1>
+        <h1 className="text-2xl">Booking paid &amp; confirmed</h1>
         <p className="mt-2 text-sm text-ink/70">
           {selectedDate?.label} · {groupSize} {groupSize === 1 ? 'guest' : 'guests'} · contributing
           to {selectedEntry?.title.en}
         </p>
+        <div className="mt-4 rounded bg-white p-4">
+          <p className="text-xs uppercase tracking-wide text-ink/50">Amount paid</p>
+          <p className="mt-1 text-2xl font-serif">{formatVnd(totalFee)}</p>
+          <SplitBreakdown total={totalFee} />
+        </div>
         <PrimaryButton
           className="mt-6"
-          onClick={() => navigate('/visitor/prep', { state: { entryId } })}
+          onClick={() => navigate('/visitor/prep', { state: { entryId, paid: true } })}
         >
           Continue to Pre-Visit Prep
         </PrimaryButton>
@@ -118,11 +158,12 @@ export default function BookingFlow() {
 
       {step === 3 && (
         <div className="mt-6">
-          <h2 className="text-lg">Confirm your residency</h2>
+          <h2 className="text-lg">Confirm &amp; pay</h2>
           <p className="mt-2 text-sm text-ink/70">
             {selectedDate?.label} · {groupSize} {groupSize === 1 ? 'guest' : 'guests'} ·
             contributing to {selectedEntry?.title.en}
           </p>
+
           <div className="mt-4 rounded bg-white p-4">
             <p className="text-xs font-medium uppercase tracking-wide text-ink/50">
               What to bring
@@ -133,9 +174,54 @@ export default function BookingFlow() {
               <li>An open afternoon — recording sessions run at their own pace</li>
             </ul>
           </div>
+
+          <div className="mt-4 rounded bg-white p-4">
+            <div className="flex items-baseline justify-between">
+              <p className="text-sm font-medium">Visit fee</p>
+              <p className="text-lg font-serif">{formatVnd(totalFee)}</p>
+            </div>
+            <p className="text-xs text-ink/50">
+              {formatVnd(VISIT_FEE_PER_GUEST)} × {groupSize} {groupSize === 1 ? 'guest' : 'guests'}
+            </p>
+            <SplitBreakdown total={totalFee} />
+          </div>
+
+          <div className="mt-4 rounded bg-white p-4">
+            <p className="text-xs font-medium uppercase tracking-wide text-ink/50">
+              Payment details
+            </p>
+            <p className="mt-1 text-xs text-ink/50">
+              Prototype only — no real payment processor is connected.
+            </p>
+            <label className="mt-3 block text-sm font-medium">Name on card</label>
+            <input
+              value={cardName}
+              onChange={(e) => setCardName(e.target.value)}
+              className="mt-1 w-full rounded border border-ink/20 bg-white px-3 py-2 text-sm"
+              placeholder="Sarah Coleman"
+            />
+            <label className="mt-3 block text-sm font-medium">Card number</label>
+            <input
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+              className="mt-1 w-full rounded border border-ink/20 bg-white px-3 py-2 text-sm"
+              placeholder="4242 4242 4242 4242"
+              inputMode="numeric"
+            />
+            <label className="mt-3 block text-sm font-medium">Expiry</label>
+            <input
+              value={cardExpiry}
+              onChange={(e) => setCardExpiry(e.target.value)}
+              className="mt-1 w-32 rounded border border-ink/20 bg-white px-3 py-2 text-sm"
+              placeholder="MM/YY"
+            />
+          </div>
+
           <div className="mt-6 flex gap-3">
             <SecondaryButton onClick={() => setStep(2)}>Back</SecondaryButton>
-            <PrimaryButton onClick={() => setConfirmed(true)}>Confirm Booking</PrimaryButton>
+            <PrimaryButton onClick={() => setConfirmed(true)} disabled={!paymentValid}>
+              Pay {formatVnd(totalFee)} &amp; Confirm
+            </PrimaryButton>
           </div>
         </div>
       )}

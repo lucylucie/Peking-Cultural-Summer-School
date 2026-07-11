@@ -11,6 +11,7 @@ export default function PostVisitCertificate() {
   const location = useLocation()
   const { getEntry, updateEntry } = useEntries()
   const entryId = location.state?.entryId ?? 'entry-che-lam'
+  const paid = location.state?.paid ?? false
   const entry = getEntry(entryId)
   const me = findUserById(CURRENT_VISITOR_ID)
 
@@ -48,7 +49,10 @@ export default function PostVisitCertificate() {
         <div className="mt-6 overflow-hidden rounded bg-white">
           <DishIllustration dishSlug={entry.dishSlug} className="aspect-[16/9] w-full" />
           <div className="p-6">
-            <p className="text-xs uppercase tracking-wide text-ink/50">Certificate of Contribution</p>
+            <div className="flex items-center justify-between">
+              <p className="text-xs uppercase tracking-wide text-ink/50">Certificate of Contribution</p>
+              {paid && <span className="text-xs text-moss">Visit paid &amp; confirmed</span>}
+            </div>
             <h2 className="mt-2 font-serif text-2xl">{entry.title.en}</h2>
             <p className="text-ink/60">{entry.title.vi}</p>
             <div className="mt-4 flex items-center gap-3">

@@ -5,6 +5,7 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Keeper of chè lam and bánh tẻ recipes passed down through four generations.',
     specialties: ['che-lam', 'banh-te'],
+    location: { x: 32, y: 40, label: "Bà Hạnh's household" },
   },
   {
     id: 'va-minh',
@@ -12,6 +13,7 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Runs the family tương fermentation house on the edge of the old village wall.',
     specialties: ['tuong'],
+    location: { x: 60, y: 65, label: "Ông Minh's fermentation house" },
   },
   {
     id: 'va-xuan',
@@ -19,6 +21,7 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Known across Duong Lam for her lunar new year chè lam variants.',
     specialties: ['che-lam'],
+    location: { x: 45, y: 22, label: "Bà Xuân's household" },
   },
   {
     id: 'va-hung',
@@ -26,6 +29,7 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Third-generation bánh tẻ maker, supplies the weekly village market.',
     specialties: ['banh-te'],
+    location: { x: 70, y: 35, label: "Ông Hùng's household" },
   },
   {
     id: 'va-lan',
@@ -33,6 +37,7 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Village elder and informal archivist of Duong Lam foodways.',
     specialties: ['general'],
+    location: { x: 50, y: 78, label: "Bà Lan's household" },
   },
 ]
 
@@ -43,6 +48,7 @@ export const contributors = [
     role: 'contributor',
     bio: 'Hanoi-based translator working between Vietnamese, English, and archival Nôm script.',
     contributionCount: 4,
+    language: 'English',
   },
   {
     id: 'co-linh',
@@ -102,6 +108,7 @@ export const visitors = [
     role: 'visitor',
     bio: 'First-time visitor, applied for a co-authoring residency in the fall season.',
     visitsCompleted: 0,
+    language: 'English',
   },
   {
     id: 'vi-james',

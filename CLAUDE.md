@@ -143,6 +143,8 @@ These are stated in the brief but restated here because they must survive every 
 
 5. **Attribution over decoration, but illustration is not decoration here.** Attribution must never be sacrificed for visual polish — it stays visible regardless of how illustrated a screen is. That said, per the revised illustration style above, dish and person illustrations are expected on every screen that references them; "restraint" now means staying within the palette and avoiding stock cultural clichés, not avoiding imagery altogether.
 
+6. **The Commons Directory shows credited relationships, not social ones.** No messaging, no follow/connect mechanics, no direct contact between users anywhere in the app. Payment exists only inside the visit booking flow (Screen 17) — never peer-to-peer, never inside a profile view.
+
 ---
 
 ## Definition of done (per screen)

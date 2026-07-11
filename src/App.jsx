@@ -8,6 +8,8 @@ import Onboarding from './screens/shared/Onboarding'
 import RoleSelection from './screens/shared/RoleSelection'
 import ArchiveExplorer from './screens/shared/ArchiveExplorer'
 import ArchiveEntryDetail from './screens/shared/ArchiveEntryDetail'
+import CommonsDirectory from './screens/shared/CommonsDirectory'
+import PersonProfile from './screens/shared/PersonProfile'
 
 import VillageDashboard from './screens/village/VillageDashboard'
 import VoiceContribution from './screens/village/VoiceContribution'
@@ -49,6 +51,8 @@ function App() {
           {/* Shared, role-agnostic archive screens */}
           <Route path="/archive" element={<ShellLayout><ArchiveExplorer /></ShellLayout>} />
           <Route path="/archive/:entryId" element={<ShellLayout><ArchiveEntryDetail /></ShellLayout>} />
+          <Route path="/people" element={<ShellLayout><CommonsDirectory /></ShellLayout>} />
+          <Route path="/people/:personId" element={<ShellLayout><PersonProfile /></ShellLayout>} />
 
           {/* Village Author track */}
           <Route path="/village" element={<ShellLayout><VillageDashboard /></ShellLayout>} />

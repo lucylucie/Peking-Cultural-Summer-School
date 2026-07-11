@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEntries } from '../../lib/EntriesContext'
 import PrimaryButton from '../../components/shared/PrimaryButton'
 import DishIllustration from '../../components/shared/DishIllustration'
+import VillageMap from '../../components/shared/VillageMap'
 
 const DATE_RANGES = [
   { id: 'r1', label: 'Aug 10 – Aug 14', booked: true },
@@ -21,6 +22,13 @@ export default function VisitDiscovery() {
         own contribution to the living archive. You leave as a credited co-author, not a
         spectator.
       </p>
+
+      <div className="mt-6">
+        <h2 className="text-sm font-medium uppercase tracking-wide text-ink/50">
+          Where you'd be hosted
+        </h2>
+        <VillageMap mode="overview" className="mt-2 h-48 w-full" />
+      </div>
 
       <div className="mt-6">
         <h2 className="text-sm font-medium uppercase tracking-wide text-ink/50">
