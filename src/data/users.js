@@ -5,7 +5,6 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Keeper of chè lam and bánh tẻ recipes passed down through four generations.',
     specialties: ['che-lam', 'banh-te'],
-    entriesAuthored: 3,
   },
   {
     id: 'va-minh',
@@ -13,7 +12,6 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Runs the family tương fermentation house on the edge of the old village wall.',
     specialties: ['tuong'],
-    entriesAuthored: 1,
   },
   {
     id: 'va-xuan',
@@ -21,7 +19,6 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Known across Duong Lam for her lunar new year chè lam variants.',
     specialties: ['che-lam'],
-    entriesAuthored: 1,
   },
   {
     id: 'va-hung',
@@ -29,7 +26,6 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Third-generation bánh tẻ maker, supplies the weekly village market.',
     specialties: ['banh-te'],
-    entriesAuthored: 1,
   },
   {
     id: 'va-lan',
@@ -37,7 +33,6 @@ export const villageAuthors = [
     role: 'village-author',
     bio: 'Village elder and informal archivist of Duong Lam foodways.',
     specialties: ['general'],
-    entriesAuthored: 0,
   },
 ]
 
