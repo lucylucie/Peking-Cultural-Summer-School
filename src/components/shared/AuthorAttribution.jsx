@@ -8,6 +8,9 @@ export default function AuthorAttribution({ entry, className }) {
     user: findUserById(c.id),
     contribution: c.contribution,
   }))
+  const source = entry.meta?.source
+  const showSourceCredit =
+    source?.type === 'uploaded' && source.creditedTo && source.creditedTo !== primaryAuthor?.name
 
   return (
     <div className={className}>
@@ -36,6 +39,11 @@ export default function AuthorAttribution({ entry, className }) {
             ))}
           </p>
         </div>
+      )}
+      {showSourceCredit && (
+        <p className="mt-1.5 text-xs text-moss">
+          Original story credited to {source.creditedTo}
+        </p>
       )}
     </div>
   )

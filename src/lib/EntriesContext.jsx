@@ -18,7 +18,17 @@ export function EntriesProvider({ children }) {
     )
   }
 
-  function addDraftEntry({ title, dishSlug, primaryAuthor, origin, aiTranscribed }) {
+  function addDraftEntry({
+    title,
+    dishSlug,
+    primaryAuthor,
+    origin,
+    ingredients = '',
+    method = '',
+    seasonalNotes = '',
+    aiTranscribed,
+    source = null,
+  }) {
     const id = `entry-draft-${nextId++}`
     const draft = {
       id,
@@ -29,12 +39,12 @@ export function EntriesProvider({ children }) {
       status: 'draft',
       sections: {
         origin,
-        ingredients: '',
-        method: '',
-        seasonalNotes: '',
+        ingredients,
+        method,
+        seasonalNotes,
         variants: [],
       },
-      meta: { aiTranscribed, edited: false },
+      meta: { aiTranscribed, edited: false, source },
       audioUrl: '/mock-audio/new-recording.mp3',
       heroImage: '/mock-images/placeholder.jpg',
       createdAt: new Date().toISOString().slice(0, 10),

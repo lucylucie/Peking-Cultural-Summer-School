@@ -147,6 +147,8 @@ These are stated in the brief but restated here because they must survive every 
 
 7. **No AI-generated imagery of unphotographed cultural content.** AI may enhance, format, or lay out real captured photos and real entry data (infographics, crop/color adjustment). It may never generate illustrative imagery depicting a dish, ritual, or practice that wasn't actually photographed or documented by a real contributor. If a visual doesn't exist, show an honest empty state, not an AI substitute. *Scope note:* this governs the product's in-fiction AI features (Content Studio, Infographic Generator) — it does not retroactively apply to `DishIllustration`/`PersonAvatar`, which are the app's static hand-drawn design system (authored once, applied uniformly, never presented as "AI generated a photo of your dish"), not a runtime AI capability a user invokes. If a future screen makes that distinction unclear, flag it rather than defaulting toward generating something.
 
+8. **Uploaded content requires Source & Consent before entering the AI pipeline.** Every upload (photo, video, audio, script) must name who the knowledge belongs to and confirm the right to share it, before any AI-assist processing happens. Uploaded content follows the same publish-approval gate as captured content — no shortcuts.
+
 ---
 
 ## Definition of done (per screen)

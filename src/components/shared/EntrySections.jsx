@@ -31,10 +31,15 @@ export default function EntrySections({ entry }) {
           <ul className="mt-3 space-y-3">
             {sections.variants.map((v, i) => {
               const author = findUserById(v.author)
+              const showSourceCredit =
+                v.source?.type === 'uploaded' && v.source.creditedTo && v.source.creditedTo !== author?.name
               return (
                 <li key={i} className="text-sm">
                   <p className="text-ink/90">{v.note}</p>
-                  <p className="mt-1 text-xs text-moss">— {author?.name ?? 'Unknown'}</p>
+                  <p className="mt-1 text-xs text-moss">
+                    — {author?.name ?? 'Unknown'}
+                    {showSourceCredit && <> · original story credited to {v.source.creditedTo}</>}
+                  </p>
                 </li>
               )
             })}
